@@ -17,6 +17,7 @@ public class GameScript : MonoBehaviour {
 		foreach (char c in shuffledWord) {
 			GameObject newTile = (GameObject)Instantiate(TilePrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);
 			newTile.GetComponent<TileScript>().setLetter(c.ToString());
+			handTileRack.GetComponent<TileRackScript>().AddTile(newTile);
 		}
 	}
 	

@@ -28,6 +28,7 @@ GameObject:
   - 222: {fileID: 22228844}
   - 212: {fileID: 21290648}
   - 114: {fileID: 11477944}
+  - 61: {fileID: 6133608}
   m_Layer: 0
   m_Name: TilePrefab
   m_TagString: Untagged
@@ -71,6 +72,19 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!61 &6133608
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174822}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2}
 --- !u!102 &10254446
 TextMesh:
   serializedVersion: 3
