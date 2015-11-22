@@ -17,11 +17,12 @@ public class TileScript : MonoBehaviour {
 	}
 
 	void OnMouseDown(){
-		Debug.Log ("clicked");
+		//Debug.Log ("clicked");
 	}
 
 	public void setLetter(string letter){
 		letterMesh.GetComponent<TextMesh>().text = letter;
 		letterString = letter;
 	}
+	
 }

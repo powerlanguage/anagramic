@@ -28,7 +28,7 @@ GameObject:
   - 222: {fileID: 22228844}
   - 212: {fileID: 21290648}
   - 114: {fileID: 11477944}
-  - 61: {fileID: 6133608}
+  - 61: {fileID: 6135120}
   m_Layer: 0
   m_Name: TilePrefab
   m_TagString: Untagged
@@ -72,7 +72,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!61 &6133608
+--- !u!61 &6135120
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
