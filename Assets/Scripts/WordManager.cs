@@ -11,27 +11,31 @@ public class WordManager : MonoBehaviour {
 
 	public static WordManager wordManager;
 
+	public TextAsset rawTextFile;
+
 	private Hashtable unsolvedWords;
 	private Hashtable solvedWords;
 
 	void Awake(){
 
-		//Load saved word arrays
+		if (wordManager == null) {
+			wordManager = this;
+		}
+
+		//Load solved/unsolved word arrays
 		Load ();
 
 		//If there is no unsolved word list, then this is the first time
 		//the script is being run, add some
 		if (unsolvedWords == null) {
 			unsolvedWords = new Hashtable ();
-			unsolvedWords.Add ("CRUNK", "CRUNK");
-			unsolvedWords.Add ("FLAT", "FLAT");
+			LoadWordsFromTextFile();
 		}
 
 		solvedWords = new Hashtable ();
 
-		if (wordManager == null) {
-			wordManager = this;
-		}
+		Debug.Log (solvedWords.Count + " solved words");
+		Debug.Log (unsolvedWords.Count + " unsolved words");
 	}
 
 
@@ -49,6 +53,18 @@ public class WordManager : MonoBehaviour {
 	public void MarkWordAsSolved(string word){
 		unsolvedWords.Remove(word);
 		solvedWords.Add (word, word);
+	}
+
+	private void LoadWordsFromTextFile(){
+
+		//should handle duplicates
+
+		string rawWords = rawTextFile.text;
+		string[] rawLines = rawWords.Split ('\n');
+		foreach (string line in rawLines) {
+			line.ToUpper();
+			unsolvedWords.Add(line, line);
+		}
 	}
 
 	//https://unity3d.com/learn/tutorials/modules/beginner/live-training-archive/persistence-data-saving-loading

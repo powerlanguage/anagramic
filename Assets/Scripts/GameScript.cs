@@ -54,6 +54,13 @@ public class GameScript : MonoBehaviour {
 
 	}
 
+	//Simple Gui to help resetting.  Doesn't actually seem to work on mobile
+	void OnGUI(){
+		if (GUI.Button (new Rect (10, 10, 100, 30), "Reset")) {
+			WordManager.wordManager.Clear();
+		}
+	}
+
 	//Cast ray from screen to mouse point
 	void ScreenMouseRay(){
 		RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);

@@ -97,7 +97,6 @@ GameObject:
   - 92: {fileID: 220200134}
   - 124: {fileID: 220200133}
   - 81: {fileID: 220200132}
-  - 114: {fileID: 220200137}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -172,17 +171,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &220200137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 220200131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f53ee53b47d564135aba7f4265d7df48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &854518928
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,6 +412,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1431010706}
   - 114: {fileID: 1431010705}
+  - 114: {fileID: 1431010707}
   m_Layer: 0
   m_Name: Anagramic
   m_TagString: Untagged
@@ -446,11 +435,8 @@ MonoBehaviour:
   TilePrefab: {fileID: 174822, guid: 8efa03ae741d84549880418733aa7661, type: 2}
   handTileRack: {fileID: 854518928}
   playTileRack: {fileID: 993325173}
-  answerWords:
-  - FELPS
-  - CATFISH
-  - MANGLE
-  answerWord: MUMBLED
+  answerWords: []
+  answerWord: 
   handScript: {fileID: 854518929}
   playScript: {fileID: 993325174}
 --- !u!4 &1431010706
@@ -465,3 +451,15 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!114 &1431010707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1431010704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f53ee53b47d564135aba7f4265d7df48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rawTextFile: {fileID: 4900000, guid: 5ea6ca16f6a5243b49b7fcf9cd4c0b46, type: 3}
