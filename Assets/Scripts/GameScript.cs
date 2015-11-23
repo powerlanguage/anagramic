@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Linq;
+using UnityEditor;
 
 public class GameScript : MonoBehaviour {
 
@@ -8,17 +9,25 @@ public class GameScript : MonoBehaviour {
 	public GameObject TilePrefab;
     public GameObject handTileRack;
 	public GameObject playTileRack;
+	public string[] answerWords;
 	public string answerWord;
 	public RackScript handScript;
 	public RackScript playScript;
 
 	// Use this for initialization
 	void Start () {
+		SetupGame ();
+	}
+
+	void SetupGame(){
+
+		//Pick random word as answer
+		answerWord = answerWords[Random.Range (0, answerWords.Length)];
 
 		//Add slots to hand and play
 		handScript.Setup (answerWord.Length);
 		playScript.Setup (answerWord.Length);
-
+		
 		string shuffledWord = ShuffleWord (answerWord);
 		//create tiles & add to hand
 		foreach (char c in shuffledWord) {
@@ -52,12 +61,34 @@ public class GameScript : MonoBehaviour {
 			if(handScript.containsTile(target)){
 				handScript.RemoveTile(target);
 				playScript.AddTile(target);
+
+				//because we've added a tile to the play rack, we should check if the game is over
+				EvaluateGame();
+
 			} else {
 				//tile is in play area
 				playScript.RemoveTile(target);
 				handScript.AddTile(target);
 			}
 		}
+	}
+
+	//Checks to see if the game has been won
+	void EvaluateGame(){
+		//Check if play rack contains any empty spots
+		if(ArrayUtility.Contains(playScript.rack, null) == false ){
+			//If not, check if the tiles equal the answer
+			if (playScript.GetRackString() == answerWord) {
+				GameWon();
+			}
+		}
+	}
+
+	//Runs when the game is won
+	void GameWon(){
+		handScript.ClearRack ();
+		playScript.ClearRack ();
+		SetupGame ();
 	}
 
 	//http://answers.unity3d.com/questions/16531/randomizing-arrays.html

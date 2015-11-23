@@ -32,12 +32,17 @@ public class RackScript : MonoBehaviour {
 	
 	//Remove Tile
 	public void RemoveTile(GameObject tile){
-
 		//check if tile is already in this array?
-
 		int i = ArrayUtility.IndexOf (rack, tile);
 		rack [i] = null;
-		
+	}
+
+	public void ClearRack(){
+		foreach (GameObject tile in rack) {
+			Destroy(tile);
+		}
+		ArrayUtility.Clear(ref rack);
+		//ArrayUtility.Clear<GameObject> (rack);
 	}
 
 	//Position the tile in relation to this rack, in the correct slot
