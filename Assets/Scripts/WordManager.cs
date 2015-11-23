@@ -32,13 +32,14 @@ public class WordManager : MonoBehaviour {
 			LoadWordsFromTextFile();
 		}
 
+		//Not sure why this needs to be down here.
 		solvedWords = new Hashtable ();
 
 		Debug.Log (solvedWords.Count + " solved words");
 		Debug.Log (unsolvedWords.Count + " unsolved words");
 	}
 
-
+	//Really ugly method for getting a random value from a hashtable
 	public string GetUnsolvedWord(){
 
 		ICollection keys = unsolvedWords.Keys;
@@ -50,11 +51,13 @@ public class WordManager : MonoBehaviour {
         return (string)unsolvedWords[randomKey];
 	}
 
+	//Move a word from one hashtable to the other
 	public void MarkWordAsSolved(string word){
 		unsolvedWords.Remove(word);
 		solvedWords.Add (word, word);
 	}
-
+	
+	//Load from a line delinated attached text file asset
 	private void LoadWordsFromTextFile(){
 
 		//should handle duplicates
@@ -62,8 +65,7 @@ public class WordManager : MonoBehaviour {
 		string rawWords = rawTextFile.text;
 		string[] rawLines = rawWords.Split ('\n');
 		foreach (string line in rawLines) {
-			line.ToUpper();
-			unsolvedWords.Add(line, line);
+			unsolvedWords.Add(line.ToUpper(), line.ToUpper());
 		}
 	}
 

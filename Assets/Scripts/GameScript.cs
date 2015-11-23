@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Linq;
-using UnityEditor;
+using System;
 
 public class GameScript : MonoBehaviour {
 
@@ -55,11 +55,11 @@ public class GameScript : MonoBehaviour {
 	}
 
 	//Simple Gui to help resetting.  Doesn't actually seem to work on mobile
-	void OnGUI(){
-		if (GUI.Button (new Rect (10, 10, 100, 30), "Reset")) {
-			WordManager.wordManager.Clear();
-		}
-	}
+//	void OnGUI(){
+//		if (GUI.Button (new Rect (10, 10, 100, 30), "Reset")) {
+//			WordManager.wordManager.Clear();
+//		}
+//	}
 
 	//Cast ray from screen to mouse point
 	void ScreenMouseRay(){
@@ -78,7 +78,9 @@ public class GameScript : MonoBehaviour {
 				playScript.AddTile(target);
 
 				//because we've added a tile to the play rack, we should check if the game is over
-				EvaluateGame();
+				if(GameOver()){
+					GameWon ();
+				}
 
 			} else {
 				//tile is in play area
@@ -89,14 +91,15 @@ public class GameScript : MonoBehaviour {
 	}
 
 	//Checks to see if the game has been won
-	void EvaluateGame(){
+	bool GameOver(){
 		//Check if play rack contains any empty spots
-		if(ArrayUtility.Contains(playScript.rack, null) == false ){
-			//If not, check if the tiles equal the answer
-			if (playScript.GetRackString() == answerWord) {
-				GameWon();
+		foreach (GameObject slot in playScript.rack) {
+			if(slot == null){
+				return false;
 			}
 		}
+		//No null slots, are the tiles in the correct order?
+		return playScript.GetRackString() == answerWord;
 	}
 
 	//Runs when the game is won
@@ -113,7 +116,9 @@ public class GameScript : MonoBehaviour {
 		char[] chars = answerWord.ToCharArray();
 
 		for (var i = chars.Length - 1; i > 0; i--) {
-			int r = Random.Range(0,i);
+			System.Random rand = new System.Random();
+
+			int r = rand.Next(0, i);
 			char tmp = chars[i];
 			chars[i] = chars[r];
 			chars[r] = tmp;

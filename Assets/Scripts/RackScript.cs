@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
+using System;
 
 public class RackScript : MonoBehaviour {
 
@@ -43,7 +43,7 @@ public class RackScript : MonoBehaviour {
 	//Remove Tile
 	public void RemoveTile(GameObject tile){
 		//check if tile is already in this array?
-		int i = ArrayUtility.IndexOf (rack, tile);
+		int i = Array.IndexOf (rack, tile);
 		rack [i] = null;
 	}
 
@@ -51,7 +51,7 @@ public class RackScript : MonoBehaviour {
 		foreach (GameObject tile in rack) {
 			Destroy(tile);
 		}
-		ArrayUtility.Clear(ref rack);
+		Array.Clear (rack, 0, rack.Length);
 		//ArrayUtility.Clear<GameObject> (rack);
 	}
 
@@ -71,9 +71,16 @@ public class RackScript : MonoBehaviour {
 		Debug.Log (tile.name + " added at slot " + slot + " local x:" + tile.transform.localPosition.x);
 	}
 
-	public bool containsTile(GameObject tile){
-		return ArrayUtility.Contains (rack, tile);
+	public bool containsTile(GameObject tileToFind){
+		//Can't do find/exist on array - something about predicates required
+		foreach (GameObject tile in rack) {
+			if(tile == tileToFind){
+				return true;
+			}
+		}
+		return false;
 	}
+
 
 	//Return Rack contents as String
 	public string GetRackString(){
