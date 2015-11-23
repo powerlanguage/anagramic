@@ -9,9 +9,15 @@ public class RackScript : MonoBehaviour {
 	public GameObject[] rack; 
 	public float spacer = 1;
 	public float slotWidth = 2;
+	public AudioClip tileAddSound;
+	private AudioSource source;
 
 	public void Setup(int slots){
 		rack = new GameObject[slots];
+	}
+
+	void Awake(){
+		source = GetComponent<AudioSource>();
 	}
 
 	//Add Tile
@@ -24,6 +30,10 @@ public class RackScript : MonoBehaviour {
 			if (rack[i] == null) {
 				rack[i] = tile;
 				UpdateTilePosition(tile, i);
+
+				//Play SFX
+				source.PlayOneShot(tileAddSound);
+
 				//We're done adding the tile, so stop the loop
 				break;
 			}
