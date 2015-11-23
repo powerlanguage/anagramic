@@ -22,7 +22,10 @@ public class GameScript : MonoBehaviour {
 	void SetupGame(){
 
 		//Pick random word as answer
-		answerWord = answerWords[Random.Range (0, answerWords.Length)];
+		//answerWord = answerWords[Random.Range (0, answerWords.Length)];
+
+		//setup as a global thing
+		answerWord = WordManager.wordManager.GetUnsolvedWord ();
 
 		//Add slots to hand and play
 		handScript.Setup (answerWord.Length);
@@ -44,6 +47,11 @@ public class GameScript : MonoBehaviour {
 		if (Input.GetMouseButtonDown (0)) {
 			ScreenMouseRay();
 		}
+
+		if (Input.GetKey("space")) {
+			WordManager.wordManager.Clear();
+		}
+
 	}
 
 	//Cast ray from screen to mouse point
@@ -86,6 +94,8 @@ public class GameScript : MonoBehaviour {
 
 	//Runs when the game is won
 	void GameWon(){
+		WordManager.wordManager.MarkWordAsSolved (answerWord);
+		WordManager.wordManager.Save ();
 		handScript.ClearRack ();
 		playScript.ClearRack ();
 		SetupGame ();
